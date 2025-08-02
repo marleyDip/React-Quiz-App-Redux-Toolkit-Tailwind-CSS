@@ -1,7 +1,7 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  question: [],
+  questions: [],
   currentQuestionIndex: 0,
   answers: [],
   isQuizCompleted: false,
@@ -14,7 +14,13 @@ const initialState = {
 const quizSlice = createSlice({
   name: "quiz",
   initialState,
-  reducers: {},
+  reducers: {
+    setQuestions: (state, action) => {
+      state.questions = action.payload;
+    },
+  },
 });
+
+export const { setQuestions } = createSlice.action;
 
 export default quizSlice.reducer;
