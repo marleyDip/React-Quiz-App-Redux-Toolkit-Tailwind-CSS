@@ -16,7 +16,7 @@ function Quiz() {
 
   //load the questions
   useEffect(() => {
-    dispatch(setQuestions());
+    dispatch(setQuestions(sampleQuestions));
   }, [dispatch]);
 
   const {
@@ -49,10 +49,16 @@ function Quiz() {
     );
   }
 
+  // Variable       State	 !isTimeActive        Meaning
+  // isTimeActive:  true	    false	       Timer is running
+  // isTimeActive:  false	    true	       Timer is not running
+
   //quiz start
   if (!isTimeActive && answers.length === 0) {
+    //console.log(questions);
+
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 px-4 py-8 grid place-items-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 px-4 py-8">
         <QuizStart />
       </div>
     );
@@ -64,7 +70,10 @@ function Quiz() {
         <div className="bg-white rounded-xl shadow-lg p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div className="flex-1">
-              <ProgressBar />
+              <ProgressBar
+                current={currentQuestionIndex + 1}
+                total={questions.length}
+              />
             </div>
 
             <div className="md:ml-6">
