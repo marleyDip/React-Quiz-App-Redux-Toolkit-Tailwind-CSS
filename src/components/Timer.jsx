@@ -23,6 +23,13 @@ function Timer() {
     }
   }, [dispatch, isTimeActive, timeLeft]);
 
+  //timer color
+  const getTimerColor = () => {
+    if (timeLeft > 60) return "text-green-600";
+    if (timeLeft > 30) return "text-yellow-600";
+    return "text-red-600";
+  };
+
   //formate time
   const formatTime = (seconds) => {
     const min = Math.floor(seconds / 60);
@@ -32,7 +39,7 @@ function Timer() {
   };
 
   return (
-    <div className={`flex items-center space-x-2`}>
+    <div className={`flex items-center space-x-2 ${getTimerColor()}`}>
       <Clock size={20} />
 
       <span className="font-mono text-lg font-semibold">

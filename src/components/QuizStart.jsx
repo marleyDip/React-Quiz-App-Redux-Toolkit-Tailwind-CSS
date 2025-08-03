@@ -1,13 +1,22 @@
 import { BookOpen, Clock, Play, Trophy } from "lucide-react";
-import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startQuiz } from "../store/quizSlice";
 
 function QuizStart() {
   const dispatch = useDispatch();
 
+  const { questions, timeLeft } = useSelector((state) => state.quiz);
+
   const handleStartQuiz = () => {
     dispatch(startQuiz());
+  };
+
+  //formate time
+  const formatTime = (seconds) => {
+    const min = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+
+    return `${min.toString().padStart(2, 0)}:${secs.toString().padStart(2, 0)}`;
   };
 
   return (
@@ -38,7 +47,9 @@ function QuizStart() {
               <BookOpen className="w-8 h-8 text-blue-600" />
             </div>
 
-            <div className="text-2xl font-bold text-blue-800 mb-2">11</div>
+            <div className="text-2xl font-bold text-blue-800 mb-2">
+              {questions.length}
+            </div>
             <div className="text-2xl font-medium">Questions</div>
           </div>
 
@@ -47,7 +58,9 @@ function QuizStart() {
               <Clock className="w-8 h-8 text-purple-600" />
             </div>
 
-            <div className="text-2xl font-bold text-purple-800 mb-2">5:00</div>
+            <div className="text-2xl font-bold text-purple-800 mb-2">
+              {formatTime(timeLeft)}
+            </div>
             <div className="text-2xl font-medium">Minutes</div>
           </div>
 

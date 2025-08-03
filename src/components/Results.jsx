@@ -1,7 +1,19 @@
 import { Award, Clock, RefreshCw, Target, Trophy } from "lucide-react";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function Results() {
+  const dispatch = useDispatch();
+  const { answers, questions, score, timeLeft } = useSelector(
+    (state) => state.quiz
+  );
+
+  const totalQuestions = questions.length;
+  const percentage = ((score / totalQuestions) * 100).toFixed(2);
+  const timeUsed = 120 - timeLeft; // Assuming the quiz starts with 120 seconds
+  const timeUsedMinutes = Math.floor(timeUsed / 60);
+  const timeUsedSeconds = timeUsed % 60;
+
   return (
     <div className="max-w-4xl mx-auto">
       <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
@@ -27,7 +39,7 @@ function Results() {
             </div>
 
             <div className="text-3xl font-bold text-blue-800 mb-2">
-              Score / Total Question
+              {score} / {totalQuestions}
             </div>
 
             <div className="text-blue-600 font-medium">Question Correct</div>
@@ -39,7 +51,7 @@ function Results() {
             </div>
 
             <div className="text-3xl font-bold text-purple-800 mb-2">
-              percentage
+              {percentage}%
             </div>
 
             <div className="text-purple-600 font-medium">score percentage</div>
@@ -50,7 +62,10 @@ function Results() {
               <Clock className="w-8 h-8 text-green-600" />
             </div>
 
-            <div className="text-3xl font-bold text-green-800 mb-2">Timer</div>
+            <div className="text-3xl font-bold text-green-800 mb-2">
+              {timeUsedMinutes.toString().padStart(2, "0")}:
+              {timeUsedSeconds.toString().padStart(2, "0")}
+            </div>
 
             <div className="text-green-600 font-medium">Time Used</div>
           </div>
