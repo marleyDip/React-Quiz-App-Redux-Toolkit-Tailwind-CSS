@@ -131,6 +131,20 @@ function QuizStart() {
         </button>
         {/* btn */}
       </div>
+
+      {/* footer */}
+      <div className="text-center mt-6 text-lg font-semibold text-gray-700">
+        &copy; {new Date().getFullYear()}{" "}
+        <a
+          href="https://marleydip.netlify.app/"
+          target="_blank"
+          className="text-emerald-500 hover:text-sky-500"
+        >
+          Md Sofian Hasan
+        </a>
+        . All Right Reserved
+      </div>
+      {/* footer */}
     </div>
   );
 }

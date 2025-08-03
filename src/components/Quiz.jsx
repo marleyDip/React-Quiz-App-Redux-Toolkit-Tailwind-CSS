@@ -43,7 +43,7 @@ function Quiz() {
   // complete quiz
   if (isQuizCompleted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 px-4 py-8 grid place-items-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-purple-200 px-4 py-8 grid place-items-center">
         <Results />
       </div>
     );
@@ -58,7 +58,7 @@ function Quiz() {
     //console.log(questions);
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 px-4 py-8">
+      <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-purple-100 px-4 py-8">
         <QuizStart />
       </div>
     );
@@ -84,15 +84,16 @@ function Quiz() {
       </div>
 
       <Questions />
+
       {/* footer */}
       <div className="text-center mt-6 text-lg font-semibold text-gray-700">
         &copy; {new Date().getFullYear()}{" "}
         <a
           href="https://marleydip.netlify.app/"
           target="_blank"
-          className="text-green-600 hover:text-red-600"
+          className="text-emerald-500 hover:text-sky-500"
         >
-          Z-Index Software Limited
+          Md Sofian Hasan
         </a>
         . All Right Reserved
       </div>
