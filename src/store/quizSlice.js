@@ -86,6 +86,16 @@ const quizSlice = createSlice({
       // recalculate score
       state.score = state.answers.filter((answer) => answer.isCorrect).length;
     },
+
+    resetQuiz: (state) => {
+      state.currentQuestionIndex = 0;
+      state.isQuizCompleted = false;
+      state.answers = [];
+      state.score = 0;
+      state.timeLeft = 120;
+      state.showExplanation = false;
+      state.isTimeActive = false;
+    },
   },
 });
 
@@ -96,6 +106,7 @@ export const {
   answerQuestions,
   nextQuestion,
   previousQuestion,
+  resetQuiz,
 } = quizSlice.actions;
 
 export default quizSlice.reducer;

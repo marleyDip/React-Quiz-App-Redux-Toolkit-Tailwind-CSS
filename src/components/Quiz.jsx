@@ -65,7 +65,7 @@ function Quiz() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-100 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-200 via-white to-purple-200 py-8 px-4">
       <div className="max-w-4xl mx-auto mb-8">
         <div className="bg-white rounded-xl shadow-lg p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
@@ -84,6 +84,19 @@ function Quiz() {
       </div>
 
       <Questions />
+      {/* footer */}
+      <div className="text-center mt-6 text-lg font-semibold text-gray-700">
+        &copy; {new Date().getFullYear()}{" "}
+        <a
+          href="https://marleydip.netlify.app/"
+          target="_blank"
+          className="text-green-600 hover:text-red-600"
+        >
+          Z-Index Software Limited
+        </a>
+        . All Right Reserved
+      </div>
+      {/* footer */}
     </div>
   );
 }

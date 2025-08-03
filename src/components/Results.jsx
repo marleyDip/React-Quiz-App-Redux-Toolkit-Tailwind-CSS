@@ -1,6 +1,7 @@
 import { Award, Clock, RefreshCw, Target, Trophy } from "lucide-react";
-import React from "react";
+
 import { useDispatch, useSelector } from "react-redux";
+import { resetQuiz } from "../store/quizSlice";
 
 function Results() {
   const dispatch = useDispatch();
@@ -13,6 +14,11 @@ function Results() {
   const timeUsed = 120 - timeLeft; // Assuming the quiz starts with 120 seconds
   const timeUsedMinutes = Math.floor(timeUsed / 60);
   const timeUsedSeconds = timeUsed % 60;
+
+  // Reset quiz action
+  const handleResetQuiz = () => {
+    dispatch(resetQuiz());
+  };
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -33,7 +39,7 @@ function Results() {
 
         {/* cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl transform hover:scale-102 transition-transform duration-200">
+          <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl transform hover:scale-104 transition-transform duration-200">
             <div className="flex items-center justify-center mb-4">
               <Target className="w-8 h-8 text-blue-600" />
             </div>
@@ -45,7 +51,7 @@ function Results() {
             <div className="text-blue-600 font-medium">Question Correct</div>
           </div>
 
-          <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-xl transform hover:scale-102 transition-transform duration-200">
+          <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-xl transform hover:scale-104 transition-transform duration-200">
             <div className="flex items-center justify-center mb-4">
               <Award className="w-8 h-8 text-purple-600" />
             </div>
@@ -57,7 +63,7 @@ function Results() {
             <div className="text-purple-600 font-medium">score percentage</div>
           </div>
 
-          <div className="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-xl transform hover:scale-102 transition-transform duration-200">
+          <div className="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-xl transform hover:scale-104 transition-transform duration-200">
             <div className="flex items-center justify-center mb-4">
               <Clock className="w-8 h-8 text-green-600" />
             </div>
@@ -78,10 +84,42 @@ function Results() {
             Question Review
           </h3>
           {/* displaying dynamic question */}
-          <div className="grid gap-4 max-h-64 overflow-y-auto"></div>
+          <div className="grid gap-4 max-h-64 overflow-y-auto">
+            {questions.map((question, index) => {
+              const answer = answers.find((a) => a.questionId === question.id);
+
+              const isCorrect = answer?.isCorrect ?? false;
+
+              return (
+                <div
+                  key={index}
+                  className={`flex items-center justify-between p-4 rounded-lg border-2 ${
+                    isCorrect
+                      ? "border-green-200 bg-green-50"
+                      : "border-red-200 bg-red-50"
+                  }`}
+                >
+                  <span className="text-sm font-medium text-gray-700">
+                    Question {index + 1}
+                  </span>
+
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      isCorrect
+                        ? "border-green-200 bg-green-50"
+                        : "border-red-200 bg-red-50"
+                    }`}
+                  ></span>
+                </div>
+              );
+            })}
+          </div>
           {/* displaying dynamic question */}
 
-          <button className="inline-flex items-center px-8 py-4 space-x-3 text-lg font-semibold rounded-xl shadow-lg text-white cursor-pointer  bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200">
+          <button
+            className="inline-flex items-center px-8 py-4 space-x-3 mt-5 text-lg font-semibold rounded-xl shadow-lg text-white cursor-pointer  bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200"
+            onClick={handleResetQuiz}
+          >
             <RefreshCw size={24} className="pr-2" />
             Take Quiz Again
           </button>
